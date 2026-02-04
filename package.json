@@ -32,7 +32,8 @@
     "dotenv": "^16.3.1",
     "playwright": "^1.41.2",
     "pino": "^8.17.2",
-    "pino-pretty": "^10.3.1"
+    "pino-pretty": "^10.3.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@eslint/js": "^8.56.0",
