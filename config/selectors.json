@@ -1,0 +1,41 @@
+{
+  "linkedIn": {
+    "loginForm": {
+      "email": "input[name='session_key']",
+      "password": "input[name='session_password']",
+      "submitBtn": "button[type='submit']"
+    },
+    "jobPage": {
+      "title": "h1.top-card-layout__title",
+      "company": "a.topcard__company-name",
+      "location": "span.job-details-jobs-unified-top-card__location",
+      "description": "div.description__text.description__text--rich",
+      "applyBtn": "button[aria-label*='Apply']",
+      "easyApplyBtn": "button[aria-label*='Easy Apply']"
+    },
+    "applyModal": {
+      "modal": "div[role='dialog']",
+      "formFields": "input, textarea, select",
+      "submitBtn": "button[type='submit'][aria-label*='Submit']",
+      "nextBtn": "button[aria-label*='Next']",
+      "closeBtn": "button[aria-label*='Close']"
+    },
+    "detection": {
+      "captchaFrame": "iframe[src*='recaptcha']",
+      "captchaChallenge": "div[id='recaptcha-anchor']",
+      "successMessage": "div[data-test-modal-id='success']",
+      "errorMessage": "div[role='alert']"
+    }
+  },
+  "fieldTypes": {
+    "text": "input[type='text'], input:not([type])",
+    "email": "input[type='email']",
+    "phone": "input[type='tel'], input[type='phone']",
+    "textarea": "textarea",
+    "select": "select",
+    "checkbox": "input[type='checkbox']",
+    "radio": "input[type='radio']",
+    "file": "input[type='file']"
+  },
+  "notes": "Update selectors if LinkedIn changes HTML structure"
+}

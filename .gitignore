@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+*.lock
+yarn.lock
+pnpm-lock.yaml
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build
+dist/
+build/
+*.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.log
+
+# Testing
+coverage/
+.nyc_output/
+
+# n8n
+.n8n/
+backup/
+
+# Logs
+logs/
+*.log
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Secrets (NEVER commit these)
+credentials.json
+.env.production
+secrets/

@@ -1,0 +1,104 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-04T00:00:00Z",
+  "description": "RAG Database - Initial responses for form auto-filling",
+  "author": "Diego Santos",
+  "responses": [
+    {
+      "id": "resp-001",
+      "question": "Por que você está interessado em trabalhar conosco?",
+      "answer": "Sou apaixonado por Engenharia de Dados e inovação tecnológica. Sua empresa é líder em soluções de dados escaláveis, e sou entusiasmado em contribuir para projetos que impactam transformação digital. Possuo experiência sólida em processamento e análise de grandes volumes de dados, e vejo uma oportunidade valiosa de crescimento profissional com seu time.",
+      "category": "motivation",
+      "keywords": ["interessado", "trabalhar", "empresa", "motivação"],
+      "confidence": 0.95,
+      "tags": ["common", "motivation"]
+    },
+    {
+      "id": "resp-002",
+      "question": "Qual é sua experiência com Python?",
+      "answer": "Possuo mais de 5 anos de experiência profissional com Python. Tenho expertise em bibliotecas como Pandas, NumPy, Polars para processamento de dados, PySpark para big data, e SQLAlchemy para ORM. Desenvolvi pipelines de ETL robustos, automatizei processos complexos e criei ferramentas de análise de dados. Mantenho-me atualizado com as melhores práticas e tenho contribuições em projetos open-source.",
+      "category": "technical",
+      "keywords": ["python", "experiência", "linguagem"],
+      "confidence": 0.92,
+      "tags": ["technical", "required"]
+    },
+    {
+      "id": "resp-003",
+      "question": "Você tem experiência com SQL?",
+      "answer": "Sim, tenho sólida experiência com SQL. Domino criação de queries complexas, otimização de performance, design de schemas relacionais, e trabalho com diferentes engines (PostgreSQL, MySQL, SQL Server, BigQuery). Implementei stored procedures, triggers, views materializadas e participei de data modeling em múltiplos projetos.",
+      "category": "technical",
+      "keywords": ["sql", "banco de dados", "database"],
+      "confidence": 0.93,
+      "tags": ["technical", "required"]
+    },
+    {
+      "id": "resp-004",
+      "question": "Qual é sua experiência com Apache Spark?",
+      "answer": "Tenho experiência prática com Apache Spark para processamento distribuído de grandes volumes de dados. Trabalhei com PySpark criando transformações ETL, otimizando performance através de particionamento e caching, e integrando pipelines com ferramentas como Airflow. Sou proficiente em operações de RDD, DataFrame e SparkSQL.",
+      "category": "technical",
+      "keywords": ["spark", "apache", "big data", "distribuído"],
+      "confidence": 0.90,
+      "tags": ["technical", "advanced"]
+    },
+    {
+      "id": "resp-005",
+      "question": "Como você lida com prazos apertados?",
+      "answer": "Priorizo eficiência sem comprometer qualidade. Divido tarefas grandes em marcos menores, identifico gargalos críticos primeiro, e comunico progresso transparentemente. Sou disciplinado em time management e tenho histórico de entregar projetos no prazo. Quando necessário, sou flexível para trabalhar além do horário convencional para garantir deadlines.",
+      "category": "soft_skills",
+      "keywords": ["prazo", "deadline", "tempo", "pressão"],
+      "confidence": 0.88,
+      "tags": ["soft_skills", "common"]
+    },
+    {
+      "id": "resp-006",
+      "question": "Qual é sua maior força?",
+      "answer": "Minha maior força é a capacidade de aprender rapidamente e adaptar-me a novos contextos. Combino pensamento analítico com execução prática, o que me permite resolver problemas complexos de forma criativa. Sou comunicativo, colaborativo e tomo iniciativa em projetos que impactam o negócio.",
+      "category": "personal",
+      "keywords": ["força", "força", "qualidade"],
+      "confidence": 0.85,
+      "tags": ["personal", "common"]
+    },
+    {
+      "id": "resp-007",
+      "question": "Você tem experiência com Docker e Kubernetes?",
+      "answer": "Tenho experiência com Docker para containerização de aplicações e CI/CD pipelines. Conhecimento básico a intermediário de Kubernetes para orquestração de containers em ambientes de produção. Trabalhei com Docker Compose para desenvolvimento local e implementei estratégias de deployment automatizado.",
+      "category": "technical",
+      "keywords": ["docker", "kubernetes", "container", "devops"],
+      "confidence": 0.85,
+      "tags": ["technical", "devops"]
+    },
+    {
+      "id": "resp-008",
+      "question": "Como você se vê em 5 anos?",
+      "answer": "Em 5 anos, aspiro ser um especialista sênior em Engenharia de Dados com liderança técnica reconhecida. Gostaria de arquitetar soluções de dados escaláveis, mentorar juniores, e contribuir para decisões estratégicas da empresa. Tenho interesse em continuar aprendendo sobre novas tecnologias e metodologias em dados.",
+      "category": "personal",
+      "keywords": ["futuro", "5 anos", "carreira"],
+      "confidence": 0.87,
+      "tags": ["personal", "common"]
+    },
+    {
+      "id": "resp-009",
+      "question": "Você tem experiência com Git e controle de versão?",
+      "answer": "Sim, sou proficiente com Git. Trabalho regularmente com workflows de branches (feature, develop, main), resolvo conflitos de merge, e sigo boas práticas de commits atômicos com mensagens descritivas. Tenho experiência com plataformas como GitHub, GitLab e Bitbucket.",
+      "category": "technical",
+      "keywords": ["git", "versionamento", "controle", "github"],
+      "confidence": 0.94,
+      "tags": ["technical", "required"]
+    },
+    {
+      "id": "resp-010",
+      "question": "Qual é sua experiência com ferramentas de BI?",
+      "answer": "Tenho experiência com ferramentas de Business Intelligence como Tableau, Power BI e Looker para criação de dashboards e relatórios analíticos. Sou capaz de conectar múltiplas fontes de dados, criar visualizações impactantes e comunicar insights para stakeholders não-técnicos.",
+      "category": "technical",
+      "keywords": ["bi", "tableau", "power bi", "dashboard"],
+      "confidence": 0.89,
+      "tags": ["technical", "advanced"]
+    }
+  ],
+  "metadata": {
+    "totalResponses": 10,
+    "categories": ["technical", "soft_skills", "personal", "motivation"],
+    "needsUpdate": "After first 100 applications, review and add new Q&A pairs",
+    "maintenance": "Update monthly or when confidence < 0.80"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "applicationsPerDay": 50,
+  "applicationsPerHour": 10,
+  "delayBetweenApplications": {
+    "min": 5000,
+    "max": 15000,
+    "description": "Milliseconds between each application to avoid detection"
+  },
+  "browserTimeout": 30000,
+  "pageLoadTimeout": 20000,
+  "maxRetries": 3,
+  "retryBackoff": {
+    "initial": 5000,
+    "multiplier": 2,
+    "maxWait": 120000,
+    "description": "Exponential backoff: 5s → 10s → 20s"
+  },
+  "formFilling": {
+    "textInputDelay": 100,
+    "dropdownDelay": 500,
+    "description": "Delays to simulate human typing/clicking"
+  },
+  "ragMatching": {
+    "minConfidenceAutoFill": 0.80,
+    "minConfidenceSuggest": 0.60,
+    "description": "Confidence thresholds for RAG responses"
+  },
+  "filters": {
+    "location": "Brasil",
+    "workType": ["Remoto", "Híbrido"],
+    "category": "Engenharia de Dados",
+    "minScore": 50,
+    "experienceLevels": ["Mid-Senior level", "Senior", "Lead"]
+  }
+}
