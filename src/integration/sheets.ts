@@ -41,7 +41,7 @@ export async function getJobsFromSheets(
     }
 
     // Primeira linha são headers
-    const [headers, ...dataRows] = rows;
+    const [, ...dataRows] = rows;
 
     const jobs: JobListing[] = dataRows.map((row, index) => ({
       id: row[0] || `job-${index}`,
@@ -167,7 +167,7 @@ export async function addToManualReview(
  * Atualiza status de uma vaga
  */
 export async function updateJobStatus(
-  config: SheetsConfig,
+  _config: SheetsConfig,
   jobId: string,
   status: 'Applied' | 'Failed' | 'Pending' | 'Manual Review'
 ): Promise<void> {

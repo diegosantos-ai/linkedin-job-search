@@ -35,7 +35,7 @@ export interface ApplicationResult {
  */
 export interface FormField {
   name: string;
-  type: 'text' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'file' | 'hidden';
+  type: 'text' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'file' | 'hidden' | 'email' | 'phone';
   label?: string;
   required: boolean;
   value?: string;

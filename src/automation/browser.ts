@@ -68,7 +68,7 @@ export async function createPage(context: BrowserContext): Promise<Page> {
   // Adiciona delays realistas
   await page.addInitScript(() => {
     // Remove webdriver flag
-    Object.defineProperty(navigator, 'webdriver', { get: () => false });
+    Object.defineProperty((window as any).navigator, 'webdriver', { get: () => false });
   });
 
   logger.debug('Nova página criada');

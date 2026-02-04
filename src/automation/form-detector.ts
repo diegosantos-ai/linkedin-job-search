@@ -131,7 +131,7 @@ async function extractSelectInfo(element: any, page: Page): Promise<FormField | 
     const required = (await element.getAttribute('required')) !== null;
 
     // Extrai opções
-    const options = await element.$$eval('option', (opts: HTMLOptionElement[]) =>
+    const options = await element.$$eval('option', (opts: any[]) =>
       opts.map(o => o.value || o.textContent?.trim() || '')
     );
 

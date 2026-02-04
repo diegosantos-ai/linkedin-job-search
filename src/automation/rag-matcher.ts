@@ -138,7 +138,7 @@ function calculateSimilarity(str1: string, str2: string): number {
  */
 export function addToRAGDatabase(
   question: string,
-  answer: string,
+  _answer: string,
   category: string = 'custom'
 ): void {
   logger.info({ question, category }, 'Nova resposta adicionada à base RAG');
