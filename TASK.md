@@ -47,14 +47,24 @@ Um sistema de automação de candidaturas em vagas do LinkedIn que:
 
 ---
 
-### Phase 2: PLANNING
+### Phase 2: PLANNING ✅ [COMPLETE]
 **Goal:** Arquitetura detalhada e quebra de tarefas  
+**Duration:** 1 dia
 **Deliverables:**
-- [ ] Arquitetura do sistema (diagrama)
-- [ ] Schema do banco de dados (Sheets + logs internos)
-- [ ] Especificação de fluxos (sucesso, falha, retry)
-- [ ] Plano de branches Git & workflow
-- [ ] Documento de dependências
+- [x] Arquitetura do sistema (diagrama) → [SYSTEM_DESIGN.md](docs/SYSTEM_DESIGN.md)
+- [x] Schema do banco de dados (Sheets + logs internos) → [DATA_SCHEMA.md](docs/DATA_SCHEMA.md)
+- [x] Especificação de fluxos (sucesso, falha, retry) → [WORKFLOWS.md](docs/WORKFLOWS.md)
+- [x] Plano de branches Git & workflow → [GIT_WORKFLOW.md](docs/GIT_WORKFLOW.md)
+- [x] Documento de dependências → [DEPENDENCIES.md](docs/DEPENDENCIES.md)
+
+**Decisões Confirmadas:**
+1. **Arquitetura:** 4 camadas (Orchestration, Data, Automation, External)
+2. **Componentes:** 7 componentes principais (Orchestrator, Form Detector, RAG, Filler, Browser, Login, Captcha)
+3. **State Machine:** 15 estados com transições bem definidas
+4. **Data Schema:** 2 abas principais (Vagas 13 cols, Candidaturas 22 cols)
+5. **Stack:** Playwright + Pino + Zod + googleapis + TypeScript
+6. **Retry Strategy:** Exponential backoff (1s → 2s → 4s → 8s)
+7. **Thresholds:** Fill rate > 50%, Max 3 tentativas, Rate limit 50/dia
 
 ---
 
