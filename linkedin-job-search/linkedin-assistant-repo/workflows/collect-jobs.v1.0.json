@@ -60,7 +60,7 @@
                 "type": "number",
                 "operation": "equals"
               },
-              "leftValue": "={{ $('Parse AI Output').item.json.score }}",
+              "leftValue": "={{ $(\"Parse AI Output\").first().json.score }}",
               "rightValue": 50
             }
           ],
@@ -154,9 +154,9 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "Title": "={{ $('Modify Job Attributes').item.json.title }}",
-            "Location": "={{ $('Modify Job Attributes').item.json.location }}",
-            "link": "={{ $('Loop Over Items').item.json.links }}"
+            "Title": "={{ $(\"Modify Job Attributes\").first().json.title }}",
+            "Location": "={{ $(\"Modify Job Attributes\").first().json.location }}",
+            "link": "={{ $(\"Loop Over Items\").first().json.links }}"
           },
           "matchingColumns": [
             "Title"
@@ -304,7 +304,7 @@
     {
       "parameters": {
         "chatId": "7926733286",
-        "text": "Title: {{ $('Modify Job Attributes').item.json.title }}\nCompany: {{ $('Modify Job Attributes').item.json.company }}\nLocation: {{ $('Modify Job Attributes').item.json.location }}\nJob Score: {{ $json.score }}\nApply: {{ $('Modify Job Attributes').item.json.applyLink }}",
+        "text": "Title: {{ $(\"Modify Job Attributes\").first().json.title }}\nCompany: {{ $(\"Modify Job Attributes\").first().json.company }}\nLocation: {{ $(\"Modify Job Attributes\").first().json.location }}\nJob Score: {{ $json.score }}\nApply: {{ $(\"Modify Job Attributes\").first().json.applyLink }}",
         "additionalFields": {
           "appendAttribution": false
         }
