@@ -9,10 +9,12 @@
 - [x] Refatoração de Busca Precisa (Junior/Pleno + Low Competition) - OK
 - [x] Integração IA (Gemini/OpenAI) para Parsing e Scoring - OK
 - [x] Persistência em Google Sheets (Novo Formato Enriquecido) - OK
+- [x] Unificação de Repositório (Documentação + Código) no GitHub Correto - OK
 
 ## Próximos Passos
 - Monitoramento contínuo da taxa de conversão das vagas capturadas.
 - Ajuste fino dos prompts de IA se necessário conforme o currículo do usuário.
+- Configurar as Secrets no GitHub Actions para ativar a automação diária.
 
 ## Entregáveis do Projeto
 - [x] requirements.md (Requisitos de negócio)

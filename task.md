@@ -30,6 +30,10 @@ Este plano implementa as melhorias propostas para o projeto de captação de vag
 - [x] 5. Checkpoint - Validar E2E
   - [x] Rodar bot e avaliar a taxa de hits e bloqueios.
   - [x] Avaliar qualidade das vagas lidas pela IA.
+- [x] 6. Unificação de Repositório e Push Oficial
+  - [x] Remover repositórios git aninhados.
+  - [x] Configurar remote correto e proteger secrets.
+  - [x] Push para repositório `linkedin-job-search`.
 
 ## Notes
 
