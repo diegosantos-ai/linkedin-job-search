@@ -154,17 +154,17 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "ID": "={{ $(\"Modify Job Attributes\").first().json.jobid }}",
-            "Title": "={{ $(\"Modify Job Attributes\").first().json.title }}",
-            "Link": "={{ $(\"Modify Job Attributes\").first().json.applyLink }}",
-            "Company": "={{ $(\"Modify Job Attributes\").first().json.company }}",
-            "Location": "={{ $(\"Modify Job Attributes\").first().json.location }}",
-            "Fit Score IA": "={{ $(\"Parse AI Output\").first().json.score }}",
-            "Date": "={{ $now.format('dd/MM/yyyy') }}",
+            "ID": "={{ $('Modify Job Attributes').first().json.jobid }}",
+            "Title": "={{ $('Modify Job Attributes').first().json.title }}",
+            "Link": "={{ $('Modify Job Attributes').first().json.applyLink }}",
+            "Company": "={{ $('Modify Job Attributes').first().json.company }}",
+            "Location": "={{ $('Modify Job Attributes').first().json.location }}",
+            "Fit Score IA": "={{ $('Parse AI Output').first().json.score }}",
+            "Date": "={{ $now.toString() }}",
             "Status": "Coletado",
-            "Experience Level": "={{ $(\"Modify Job Attributes\").first().json.experience_level }}",
-            "Modality": "={{ $(\"Modify Job Attributes\").first().json.remote }}",
-            "Tech Stack": "={{ $(\"Parse AI Output\").first().json.techStack }}"
+            "Experience Level": "={{ $('Modify Job Attributes').first().json.experience_level }}",
+            "Modality": "={{ $('Modify Job Attributes').first().json.remote }}",
+            "Tech Stack": "={{ $('Parse AI Output').first().json.techStack }}"
           },
           "matchingColumns": [
             "Link"
@@ -192,7 +192,7 @@
     {
       "parameters": {
         "chatId": "7926733286",
-        "text": "Title: {{ $(\"Modify Job Attributes\").first().json.title }}\nCompany: {{ $(\"Modify Job Attributes\").first().json.company }}\nLocation: {{ $(\"Modify Job Attributes\").first().json.location }}\nJob Score: {{ $json.score }}\nApply: {{ $(\"Modify Job Attributes\").first().json.applyLink }}",
+        "text": "Title: {{ $('Modify Job Attributes').first().json.title }}\nCompany: {{ $('Modify Job Attributes').first().json.company }}\nLocation: {{ $('Modify Job Attributes').first().json.location }}\nJob Score: {{ $json.score }}\nApply: {{ $('Modify Job Attributes').first().json.applyLink }}",
         "additionalFields": {
           "appendAttribution": false
         }
