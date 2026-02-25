@@ -81,7 +81,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Você é um Recrutador Sênior de TI especializado em Engenharia de Dados e Automação.\n\nOBJETIVO: Avaliar se a vaga abaixo condiz com o perfil do candidato (Engenharia de Dados, Ciência de Dados, IA, Python, Automação).\n\nREGRAS CRÍTICAS DE FILTRAGEM:\n1. Se o título da vaga envolver Vendas, Atendimento ao Cliente Bancário, Administrativo Geral ou Gestão de Contas (Ex: Agente de Negócios, Gerente, Auxiliar Administrativo), a pontuação (score) DEVE ser 0.\n2. Foque apenas em vagas técnicas: Engenheiro de Dados (Jr/Pl), Analista de Dados, Desenvolvedor Python, Especialista em IA/LLM ou Automação.\n3. Se a vaga for compatível, dê um score de 0 a 100 baseado na compatibilidade técnica de ferramentas (Python, SQL, Cloud, etc).\n4. Escreva uma carta de apresentação curta, profissional e em Português-BR, destacando as experiências do currículo que batem com a vaga.\n\nFORMATO DE SAÍDA (JSON PURO):\n{\n  \"score\": 85,\n  \"coverLetter\": \"Prezado recrutador...\"\n}\n\nJob Description: {{ $json.description }}\nResume: {{ $(\"Extract from File\").first().json.text }}",
+        "text": "=Você é um Recrutador Sênior de TI especializado em Engenharia de Dados e Automação.\n\nOBJETIVO: Avaliar se a vaga abaixo condiz com o perfil do candidato (Engenharia de Dados, Ciência de Dados, IA, Python, Automação).\n\nREGRAS CRÍTICAS DE FILTRAGEM:\n1. Se o título da vaga envolver Vendas, Atendimento ao Cliente Bancário, Administrativo Geral ou Gestão de Contas (Ex: Agente de Negócios, Gerente, Auxiliar Administrativo), a pontuação (score) DEVE ser 0.\n2. Foque apenas em vagas técnicas: Engenheiro de Dados (Jr/Pl), Analista de Dados, Desenvolvedor Python, Especialista em IA/LLM ou Automação.\n3. Se a vaga for compatível, dê um score de 0 a 100 baseado na compatibilidade técnica de ferramentas (Python, SQL, Cloud, etc).\n4. Escreva uma carta de apresentação curta, profissional e em Português-BR, destacando as experiências do currículo que batem com a vaga.\n\nFORMATO DE SAÍDA (JSON PURO):\n{\n  \"score\": 85,\n  \"coverLetter\": \"Prezado recrutador...\",\n  \"techStack\": \"Python, SQL, AWS\"\n}\n\nJob Description: {{ $json.description }}\nResume: {{ $(\"Extract from File\").first().json.text }}",
         "options": {}
       },
       "id": "c030fd33-37ed-4fae-8bce-7af97e1de638",
@@ -154,12 +154,20 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
+            "ID": "={{ $(\"Modify Job Attributes\").first().json.jobid }}",
             "Title": "={{ $(\"Modify Job Attributes\").first().json.title }}",
+            "Link": "={{ $(\"Modify Job Attributes\").first().json.applyLink }}",
+            "Company": "={{ $(\"Modify Job Attributes\").first().json.company }}",
             "Location": "={{ $(\"Modify Job Attributes\").first().json.location }}",
-            "link": "={{ $(\"Loop Over Items\").first().json.links }}"
+            "Fit Score IA": "={{ $(\"Parse AI Output\").first().json.score }}",
+            "Date": "={{ $now.format('dd/MM/yyyy') }}",
+            "Status": "Coletado",
+            "Experience Level": "={{ $(\"Modify Job Attributes\").first().json.experience_level }}",
+            "Modality": "={{ $(\"Modify Job Attributes\").first().json.remote }}",
+            "Tech Stack": "={{ $(\"Parse AI Output\").first().json.techStack }}"
           },
           "matchingColumns": [
-            "Title"
+            "Link"
           ],
           "attemptToConvertTypes": false,
           "convertFieldsToString": false
