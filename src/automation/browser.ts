@@ -1,4 +1,8 @@
-import { chromium, Browser, BrowserContext, Page } from 'playwright';
+import { Browser, BrowserContext, Page } from 'playwright';
+import { chromium } from 'playwright-extra';
+// @ts-ignore
+import stealthPlugin from 'puppeteer-extra-plugin-stealth';
+
 import { logger } from '../logger/index.js';
 import type { AppConfig } from '../types/index.js';
 
@@ -6,6 +10,9 @@ import type { AppConfig } from '../types/index.js';
  * Gerenciador de sessão do browser Playwright
  * Responsável por criar, configurar e destruir instâncias do navegador
  */
+
+// Enable stealth plugin
+chromium.use(stealthPlugin());
 
 let browserInstance: Browser | null = null;
 let contextInstance: BrowserContext | null = null;
@@ -21,7 +28,7 @@ export async function launchBrowser(config: AppConfig): Promise<Browser> {
 
   logger.info('Iniciando browser Chromium...');
 
-  browserInstance = await chromium.launch({
+  const launchOptions: any = {
     headless: config.app.headless,
     timeout: config.app.browserTimeout,
     args: [
@@ -30,9 +37,16 @@ export async function launchBrowser(config: AppConfig): Promise<Browser> {
       '--disable-dev-shm-usage',
       '--disable-blink-features=AutomationControlled',
     ],
-  });
+  };
 
-  logger.info('Browser iniciado com sucesso');
+  if (config.app.proxyUrl) {
+    launchOptions.proxy = { server: config.app.proxyUrl };
+    logger.info('Proxy server configurado');
+  }
+
+  browserInstance = await chromium.launch(launchOptions);
+
+  logger.info('Browser Chromium (stealth) iniciado com sucesso');
   return browserInstance;
 }
 
@@ -64,7 +78,7 @@ export async function createContext(browser: Browser): Promise<BrowserContext> {
  */
 export async function createPage(context: BrowserContext): Promise<Page> {
   const page = await context.newPage();
-  
+
   // Adiciona delays realistas
   await page.addInitScript(() => {
     // Remove webdriver flag

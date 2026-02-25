@@ -18,6 +18,51 @@ export interface SheetsConfig {
 }
 
 /**
+ * Salva listagem de vagas extraídas e enriquecidas
+ */
+export async function saveJobsToSheets(
+  config: SheetsConfig,
+  jobs: any[]
+): Promise<void> {
+  logger.info({ count: jobs.length }, 'Salvando novas vagas no Sheets...');
+
+  if (jobs.length === 0) return;
+
+  try {
+    const rows = jobs.map(job => [
+      `job-${Date.now()}-${Math.floor(Math.random() * 1000)}`, // ID
+      job.title || '',
+      job.link || job.url || '',
+      job.company || '',
+      job.location || '',
+      job.enriched_data?.fit_score || 0,
+      new Date().toISOString(), // Scraped Date
+      'Pending', // Application Status
+      job.applicants || '',
+      job.enriched_data?.experience_level || '',
+      job.enriched_data?.modality || '',
+      job.enriched_data?.tech_stack?.join(', ') || ''
+    ]);
+
+    await sheets.spreadsheets.values.append({
+      key: config.apiKey,
+      spreadsheetId: config.spreadsheetId,
+      // Usando A:L para acomodar os novos campos extraídos pela IA
+      range: `${config.jobsSheet}!A:L`,
+      valueInputOption: 'RAW',
+      requestBody: {
+        values: rows,
+      },
+    });
+
+    logger.info('✅ Vagas salvas com sucesso no Sheets');
+  } catch (error) {
+    logger.error(error, 'Erro ao salvar vagas no Sheets');
+    throw error;
+  }
+}
+
+/**
  * Busca vagas do Google Sheets
  */
 export async function getJobsFromSheets(
@@ -34,7 +79,7 @@ export async function getJobsFromSheets(
     });
 
     const rows = response.data.values || [];
-    
+
     if (rows.length === 0) {
       logger.warn('Nenhuma vaga encontrada no Sheets');
       return [];
@@ -58,13 +103,13 @@ export async function getJobsFromSheets(
 
     // Aplica filtros
     let filtered = jobs;
-    
+
     if (filters?.minScore) {
       filtered = filtered.filter(j => (j.rawData.score || 0) >= filters.minScore!);
     }
-    
+
     if (filters?.location) {
-      filtered = filtered.filter(j => 
+      filtered = filtered.filter(j =>
         j.location.toLowerCase().includes(filters.location!.toLowerCase())
       );
     }

@@ -43,3 +43,4 @@ Thumbs.db
 credentials.json
 .env.production
 secrets/
+*.env

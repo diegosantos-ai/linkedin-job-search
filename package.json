@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
+    "scrape": "tsx src/run-scraper.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "vitest",
@@ -30,9 +31,11 @@
     "axios": "^1.6.8",
     "dotenv": "^16.3.1",
     "googleapis": "^131.0.0",
-    "playwright": "^1.41.2",
     "pino": "^8.17.2",
     "pino-pretty": "^10.3.1",
+    "playwright": "^1.41.2",
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "zod": "^3.22.4"
   },
   "devDependencies": {

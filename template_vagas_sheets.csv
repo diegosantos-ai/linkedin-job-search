@@ -1,0 +1,3 @@
+ID,Title,Link,Company,Location,Fit Score IA,Date,Status,Applicants,Experience Level,Modality,Tech Stack
+job-1234567,Engenheiro de Dados Sênior,https://linkedin.com/jobs/view/1234,Tech Corp Brasil,São Paulo - SP (Híbrido),85,2026-02-25T12:00:00.000Z,Pending,12,Senior,Híbrido,"Python, SQL, AWS, Airflow, Spark"
+job-1234568,Analista de Dados Pleno,https://linkedin.com/jobs/view/5678,Data Insights,Remoto,92,2026-02-25T12:15:00.000Z,Pending,45,Pleno,Remoto,"SQL, PowerBI, Python, dbt"

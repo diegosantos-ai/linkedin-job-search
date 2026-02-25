@@ -42,6 +42,7 @@ async function loadConfig(): Promise<AppConfig> {
       maxRetries: Number(process.env.RETRY_ATTEMPTS || '3'),
       headless: process.env.HEADLESS !== 'false',
       browserTimeout: Number(process.env.BROWSER_TIMEOUT || '30000'),
+      proxyUrl: process.env.PROXY_URL,
     },
   };
 
@@ -85,7 +86,7 @@ async function main() {
 
     // 4. Limita quantidade por dia
     const limitedJobs = jobs.slice(0, config.app.maxApplicationsPerDay);
-    
+
     if (limitedJobs.length < jobs.length) {
       logger.warn(
         { limit: config.app.maxApplicationsPerDay, total: jobs.length },

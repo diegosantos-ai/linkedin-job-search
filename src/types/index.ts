@@ -63,12 +63,14 @@ export interface AppConfig {
     spreadsheetId: string;
     jobsSheet: string;
     applicationsSheet: string;
+    manualReviewSheet: string;
   };
   app: {
     maxApplicationsPerDay: number;
     maxRetries: number;
     headless: boolean;
     browserTimeout: number;
+    proxyUrl?: string;
   };
 }
 
