@@ -81,7 +81,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Hi, you are a helpful job matcher, you read my resume then analyze the given resume and job description and provide a job matching score. also write a cover letter based on my resume and the job description. cover letter must be at least 2 paragraph and ignore the name, address and signiture part from start and end.\nif you are using special character like \" use \\ to escape it. output must be parse in json without error. \n\nfor example your response should be like: {\"score\": 80, \"coverLetter\": \"sample cover letter\" }\n\njob_description: {{ $json.description }}\nmy_resume: {{ $('Extract from File').item.json.text }}",
+        "text": "=Hi, you are a helpful job matcher, you read my resume then analyze the given resume and job description and provide a job matching score. also write a cover letter based on my resume and the job description. cover letter must be at least 2 paragraph and ignore the name, address and signiture part from start and end.\nif you are using special character like \" use \\ to escape it. output must be parse in json without error. \n\nfor example your response should be like: {\"score\": 80, \"coverLetter\": \"sample cover letter\" }\n\njob_description: {{ $json.description }}\nmy_resume: {{ $(\"Extract from File\").first().json.text }}",
         "options": {}
       },
       "id": "c030fd33-37ed-4fae-8bce-7af97e1de638",
@@ -652,19 +652,16 @@
               "attribute": "data-semaphore-content-urn"
             },
             {
-              "key": "remote"
+              "key": "remote",
+              "cssSelector": "span.jobs-details__topcard-job-type"
             },
             {
-              "key": "experience_level"
+              "key": "experience_level",
+              "cssSelector": "span.jobs-details__topcard-job-type"
             },
             {
-              "key": "remote_check"
-            },
-            {
-              "key": "job_type"
-            },
-            {
-              "key": "easy_apply"
+              "key": "job_type",
+              "cssSelector": "span.jobs-details__topcard-job-type"
             }
           ]
         },
