@@ -1,0 +1,43 @@
+name: LinkedIn Automated Scraper
+
+on:
+  schedule:
+    # Rodar todos os dias às 09:00 e 18:00 UTC
+    - cron: '0 9,18 * * *'
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Permite rodar manualmente pelo GitHub
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+        
+      - name: Build project
+        run: npm run build
+        
+      - name: Run Scraper
+        env:
+          LINKEDIN_EMAIL: ${{ secrets.LINKEDIN_EMAIL }}
+          LINKEDIN_PASSWORD: ${{ secrets.LINKEDIN_PASSWORD }}
+          GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
+          GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
+          GOOGLE_SHEETS_JOBS_SHEET: ${{ secrets.GOOGLE_SHEETS_JOBS_SHEET }}
+          GOOGLE_SHEETS_APPLICATIONS_SHEET: ${{ secrets.GOOGLE_SHEETS_APPLICATIONS_SHEET }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          HEADLESS: "true"
+        run: npm run scrape

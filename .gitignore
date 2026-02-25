@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.*
+*.env
+linkedin-job-search/linkedin-assistant-repo/.env
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Secrets
+credentials.json
+secrets/
+*.json
+!package.json
+!tsconfig.json
+!*.v1.0.json
+
+# Workflows
+!.github/workflows/*.yml
