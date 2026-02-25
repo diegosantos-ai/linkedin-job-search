@@ -1,6 +1,8 @@
 import type { Page } from 'playwright';
 import { logger } from '../../logger/index.js';
-import selectors from '../../../config/selectors.json' assert { type: 'json' };
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const selectors = require('../../../config/selectors.json');
 
 /**
  * Handler de detecção e tratamento de Captcha
@@ -55,8 +57,8 @@ export async function detectCaptcha(page: Page): Promise<CaptchaDetection> {
 
     // Verifica por texto indicando verificação
     const bodyText = await page.textContent('body');
-    if (bodyText?.toLowerCase().includes('verify') || 
-        bodyText?.toLowerCase().includes('unusual activity')) {
+    if (bodyText?.toLowerCase().includes('verify') ||
+      bodyText?.toLowerCase().includes('unusual activity')) {
       logger.warn('⚠️ Texto de verificação detectado');
       return {
         detected: true,
@@ -90,7 +92,7 @@ export async function waitForCaptchaSolution(
 
   while (Date.now() - startTime < timeoutMs) {
     const detection = await detectCaptcha(page);
-    
+
     if (!detection.detected) {
       logger.info('✅ Captcha resolvido!');
       return true;

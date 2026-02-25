@@ -27,15 +27,15 @@ export async function retry<T>(
     try {
       logger.debug({ attempt, context }, 'Tentando executar...');
       const result = await fn();
-      
+
       if (attempt > 1) {
         logger.info({ attempt, context }, '✅ Sucesso após retry');
       }
-      
+
       return result;
     } catch (error) {
       lastError = error;
-      
+
       if (attempt === options.maxAttempts) {
         logger.error(
           { attempt, maxAttempts: options.maxAttempts, error, context },
@@ -75,9 +75,14 @@ export function isRetryableError(error: any): boolean {
     'too many requests',
   ];
 
-  const errorMessage = error.message?.toLowerCase() || String(error).toLowerCase();
+  const errorMessage = error.message?.toLowerCase() || '';
+  const errorCode = error.code?.toLowerCase() || '';
+  const errorString = String(error).toLowerCase();
 
-  return retryablePatterns.some(pattern => errorMessage.includes(pattern));
+  return retryablePatterns.some(pattern => {
+    const p = pattern.toLowerCase();
+    return errorMessage.includes(p) || errorCode.includes(p) || errorString.includes(p);
+  });
 }
 
 /**

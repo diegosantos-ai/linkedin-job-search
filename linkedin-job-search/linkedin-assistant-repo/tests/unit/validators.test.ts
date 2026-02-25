@@ -5,7 +5,7 @@ import {
   validateAppConfig,
   isLinkedInUrl,
   isValidScore,
-} from '../utils/validators';
+} from '../../src/utils/validators.js';
 
 describe('Validators - Job Listing', () => {
   it('deve validar job listing válido', () => {
@@ -87,6 +87,7 @@ describe('Validators - App Config', () => {
         spreadsheetId: 'spreadsheet-id',
         jobsSheet: 'Vagas',
         applicationsSheet: 'Candidaturas',
+        manualReviewSheet: 'ManualReview',
       },
       app: {
         maxApplicationsPerDay: 50,

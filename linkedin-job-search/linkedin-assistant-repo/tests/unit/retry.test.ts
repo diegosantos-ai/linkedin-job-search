@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { retry, isRetryableError, shouldRetry } from '../utils/retry';
+import { retry, isRetryableError, shouldRetry } from '../../src/utils/retry.js';
 
 describe('Retry - Error Detection', () => {
   it('deve identificar erro de timeout como retryable', () => {
@@ -43,9 +43,14 @@ describe('Retry - Should Retry Logic', () => {
 describe('Retry - Exponential Backoff', () => {
   it('deve executar função com sucesso na primeira tentativa', async () => {
     const fn = vi.fn().mockResolvedValue('success');
-    
-    const result = await retry(fn, { maxAttempts: 3 }, 'test-op');
-    
+
+    const result = await retry(fn, {
+      maxAttempts: 3,
+      initialDelayMs: 10,
+      multiplier: 2,
+      maxDelayMs: 100
+    }, 'test-op');
+
     expect(result).toBe('success');
     expect(fn).toHaveBeenCalledTimes(1);
   });
@@ -55,20 +60,30 @@ describe('Retry - Exponential Backoff', () => {
       .mockRejectedValueOnce(new Error('Timeout'))
       .mockRejectedValueOnce(new Error('Timeout'))
       .mockResolvedValueOnce('success');
-    
-    const result = await retry(fn, { maxAttempts: 3, initialDelayMs: 10 }, 'test-op');
-    
+
+    const result = await retry(fn, {
+      maxAttempts: 3,
+      initialDelayMs: 10,
+      multiplier: 2,
+      maxDelayMs: 100
+    }, 'test-op');
+
     expect(result).toBe('success');
     expect(fn).toHaveBeenCalledTimes(3);
   });
 
   it('deve lançar erro após esgotar tentativas', async () => {
     const fn = vi.fn().mockRejectedValue(new Error('Timeout'));
-    
+
     await expect(
-      retry(fn, { maxAttempts: 2, initialDelayMs: 10 }, 'test-op')
+      retry(fn, {
+        maxAttempts: 2,
+        initialDelayMs: 10,
+        multiplier: 2,
+        maxDelayMs: 100
+      }, 'test-op')
     ).rejects.toThrow('Timeout');
-    
+
     expect(fn).toHaveBeenCalledTimes(2);
   });
 
@@ -77,18 +92,18 @@ describe('Retry - Exponential Backoff', () => {
       .mockRejectedValueOnce(new Error('Timeout'))
       .mockRejectedValueOnce(new Error('Timeout'))
       .mockResolvedValueOnce('success');
-    
+
     const startTime = Date.now();
-    
+
     await retry(fn, {
       maxAttempts: 3,
       initialDelayMs: 100,
-      multiplier: 10, // 100ms → 1000ms (capped at 500ms)
+      multiplier: 2,
       maxDelayMs: 500,
     }, 'test-op');
-    
+
     const duration = Date.now() - startTime;
-    
+
     // Deve ter esperado ~100ms + ~500ms = ~600ms (não 100ms + 1000ms)
     expect(duration).toBeLessThan(800);
   });

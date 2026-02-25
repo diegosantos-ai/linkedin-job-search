@@ -1,6 +1,21 @@
 import { logger } from '../logger/index.js';
-import ragDatabase from '../../config/rag-database.json' assert { type: 'json' };
+import { createRequire } from 'node:module';
 import type { FormField } from '../types/index.js';
+
+interface RAGResponse {
+  id: string;
+  question: string;
+  answer: string;
+  category: string;
+  confidence: number;
+}
+
+interface RAGDatabase {
+  responses: RAGResponse[];
+}
+
+const require = createRequire(import.meta.url);
+const ragDatabase = require('../../config/rag-database.json') as RAGDatabase;
 
 /**
  * RAG (Retrieval-Augmented Generation) Matcher

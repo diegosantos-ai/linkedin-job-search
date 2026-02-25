@@ -46,6 +46,7 @@ export const AppConfigSchema = z.object({
     spreadsheetId: z.string().min(1),
     jobsSheet: z.string().default('Vagas'),
     applicationsSheet: z.string().default('Candidaturas'),
+    manualReviewSheet: z.string().default('ManualReview'),
   }),
   app: z.object({
     maxApplicationsPerDay: z.number().int().positive().default(50),

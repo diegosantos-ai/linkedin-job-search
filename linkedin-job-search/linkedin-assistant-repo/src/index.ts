@@ -34,6 +34,8 @@ async function loadConfig(): Promise<AppConfig> {
       jobsSheet: process.env.GOOGLE_SHEETS_JOBS_SHEET || 'Vagas',
       applicationsSheet:
         process.env.GOOGLE_SHEETS_APPLICATIONS_SHEET || 'Candidaturas',
+      manualReviewSheet:
+        process.env.GOOGLE_SHEETS_MANUAL_REVIEW_SHEET || 'ManualReview',
     },
     app: {
       maxApplicationsPerDay: Number(

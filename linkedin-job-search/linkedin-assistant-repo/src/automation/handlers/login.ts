@@ -1,6 +1,8 @@
 import type { Page } from 'playwright';
 import { logger } from '../../logger/index.js';
-import selectors from '../../../config/selectors.json' assert { type: 'json' };
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const selectors = require('../../../config/selectors.json');
 
 /**
  * Handler de autenticação no LinkedIn
