@@ -58,10 +58,10 @@
               "id": "1499f1ac-a7ae-4983-85c7-aa7b8445b2e2",
               "operator": {
                 "type": "number",
-                "operation": "equals"
+                "operation": "gte"
               },
               "leftValue": "={{ $(\"Parse AI Output\").first().json.score }}",
-              "rightValue": 50
+              "rightValue": 60
             }
           ],
           "combinator": "and"
@@ -81,7 +81,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Você é um Recrutador Sênior de TI especializado em Engenharia de Dados e Automação.\n\nOBJETIVO: Avaliar se a vaga abaixo condiz com o perfil do candidato (Engenharia de Dados, Ciência de Dados, IA, Python, Automação).\n\nREGRAS CRÍTICAS DE FILTRAGEM:\n1. Se o título da vaga envolver Vendas, Atendimento ao Cliente Bancário, Administrativo Geral ou Gestão de Contas (Ex: Agente de Negócios, Gerente, Auxiliar Administrativo), a pontuação (score) DEVE ser 0.\n2. Foque apenas em vagas técnicas: Engenheiro de Dados (Jr/Pl), Analista de Dados, Desenvolvedor Python, Especialista em IA/LLM ou Automação.\n3. Se a vaga for compatível, dê um score de 0 a 100 baseado na compatibilidade técnica de ferramentas (Python, SQL, Cloud, etc).\n4. Escreva uma carta de apresentação curta, profissional e em Português-BR, destacando as experiências do currículo que batem com a vaga.\n\nFORMATO DE SAÍDA (JSON PURO):\n{\n  \"score\": 85,\n  \"coverLetter\": \"Prezado recrutador...\",\n  \"techStack\": \"Python, SQL, AWS\"\n}\n\nJob Description: {{ $json.description }}\nResume: {{ $(\"Extract from File\").first().json.text }}",
+        "text": "=Você é um avaliador técnico de vagas.\n\nTAREFA: Avaliar compatibilidade da vaga com o perfil de Engenheiro/Analista de Dados Sênior.\n\nREGRAS:\n- Vagas de Vendas, Atendimento, Bancário, RH, Administrativo = score 0, techStack vazio\n- Vagas técnicas (Dados, Python, SQL, BI, IA, Cloud, RPA, Automação) = score 60-100\n- Score = compatibilidade de ferramentas com o currículo\n- techStack = tecnologias exigidas na vaga, separadas por vírgula\n\nRESPONDA APENAS COM JSON PURO, SEM MARKDOWN:\n{\"score\": 85, \"techStack\": \"Python, SQL, AWS, Airflow\"}\n\nDescrição da vaga: {{ $json.description }}\nCurrículo: {{ $(\"Extract from File\").first().json.text }}",
         "options": {}
       },
       "id": "c030fd33-37ed-4fae-8bce-7af97e1de638",
@@ -160,8 +160,8 @@
             "Company": "={{ $('Modify Job Attributes').first().json.company }}",
             "Location": "={{ $('Modify Job Attributes').first().json.location }}",
             "Fit Score IA": "={{ $('Parse AI Output').first().json.score }}",
-            "Date": "={{ $now.toString() }}",
-            "Status": "Coletado",
+            "Date": "={{ $now.toFormat('yyyy-MM-dd HH:mm') }}",
+            "Status": "Pendente",
             "Experience Level": "={{ $('Modify Job Attributes').first().json.experience_level }}",
             "Modality": "={{ $('Modify Job Attributes').first().json.remote }}",
             "Tech Stack": "={{ $('Parse AI Output').first().json.techStack }}"
@@ -498,19 +498,16 @@
     },
     {
       "parameters": {
-        "mode": "raw",
-        "jsonOutput": "=\n{{ $json.output }}",
-        "includeOtherFields": true,
-        "options": {}
+        "jsCode": "// Gemini às vezes retorna JSON dentro de blocos ```json ... ```\n// Este código extrai o JSON de forma segura independente do formato\nconst rawOutput = $input.first().json.output || '';\n\n// Remove markdown code fences\nlet cleaned = rawOutput.replace(/```json/gi, '').replace(/```/g, '').trim();\n\n// Find first { and last }\nconst start = cleaned.indexOf('{');\nconst end = cleaned.lastIndexOf('}');\n\nif (start === -1 || end === -1) {\n  return [{ json: { score: 0, techStack: '', ...$input.first().json } }];\n}\n\ntry {\n  const parsed = JSON.parse(cleaned.substring(start, end + 1));\n  return [{ json: {\n    score: parsed.score ?? 0,\n    techStack: parsed.techStack ?? '',\n    ...$input.first().json\n  }}];\n} catch(e) {\n  return [{ json: { score: 0, techStack: '', ...$input.first().json } }];\n}"
       },
       "id": "1abc27d3-7590-4454-b40b-c4073b2aeef8",
       "name": "Parse AI Output",
-      "type": "n8n-nodes-base.set",
+      "type": "n8n-nodes-base.code",
       "position": [
         688,
         192
       ],
-      "typeVersion": 3.4
+      "typeVersion": 2
     },
     {
       "parameters": {
